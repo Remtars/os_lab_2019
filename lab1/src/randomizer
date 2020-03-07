@@ -1,0 +1,6 @@
+# !/bin/bash
+
+for i in {1..150}
+do
+    od -An -td -N2 /dev/urandom
+done

@@ -1,0 +1,11 @@
+#! /bin/bash
+i=0
+sum=0
+
+for arg in $(cat numbers.txt)
+do
+    sum=$(($sum + ${arg}))
+    i=$(($i+1))
+done
+
+expr $sum / $i
