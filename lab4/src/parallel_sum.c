@@ -82,7 +82,7 @@ int main(int argc, char **argv) {
     unsigned int modulo = 1000;
     int *array = malloc(sizeof(int) * array_size);
     GenerateArrayModulo(array, array_size, seed, modulo);
-    PrintArray(array, array_size);
+    //PrintArray(array, array_size);
 
     struct timeval time_start;
     gettimeofday(&time_start, NULL);
