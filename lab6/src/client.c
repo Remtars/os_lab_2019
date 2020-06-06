@@ -209,6 +209,8 @@ int main(int argc, char **argv) {
         if (i == servers_num - 1) args[i].end = k;
         else args[i].end = part * (i + 1);
 
+        args[i].mod = mod;
+
         pthread_create(&threads[i], NULL, SendTask, (void*)&args[i]);
     }
 
