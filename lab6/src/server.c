@@ -12,6 +12,7 @@
 #include <sys/types.h>
 
 #include "pthread.h"
+#include "MultModulo.h"
 
 pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 
@@ -20,19 +21,6 @@ struct FactorialArgs {
   uint64_t end;
   uint64_t mod;
 };
-
-uint64_t MultModulo(uint64_t a, uint64_t b, uint64_t mod) {
-  uint64_t result = 0;
-  a = a % mod;
-  while (b > 0) {
-    if (b % 2 == 1)
-      result = (result + a) % mod;
-    a = (a * 2) % mod;
-    b /= 2;
-  }
-
-  return result % mod;
-}
 
 uint64_t Factorial(const struct FactorialArgs *args) 
 {
@@ -186,10 +174,10 @@ int main(int argc, char **argv)
             struct FactorialArgs args[tnum];
             for (uint32_t i = 0; i < tnum; i++) 
             {
-                args[i].begin = begin + i * part;
+                args[i].begin = begin + part * i;
                 if (i != 0) args[i].begin++;
                 if (i == tnum - 1) args[i].end = end;
-                else args[i].end = begin + (i + 1) * part;
+                else args[i].end = begin + part * (i + 1);
                 args[i].mod = mod;
 
                 if (pthread_create(&threads[i], NULL, ThreadFactorial, (void *)&args[i])) 
